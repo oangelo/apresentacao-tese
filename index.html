@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+
+<title>Estudos de Sistemas Dinâmicos Não Lineares: Pêndulo Duplo, Batimentos Cardíacos e Coletivos de Animais</title>
+
+<meta name="description" content="Estudos de Sistemas Diâmicos Não
+Lineares: Pêndulo Duplo, Batimentos Cardíacos e Coletivo de Animais">
+<meta name="author" content="Angelo Mondaini Calvão">
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="css/reveal.min.css">
+<link rel="stylesheet" href="css/theme/angelo.css" id="theme">
+
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+
+<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<script>
+document.write( '<link rel="stylesheet" href="css/print/' 
+        + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) 
+        + '.css" type="text/css" media="print">' );
+</script>
+
+<script type="text/javascript" src="MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<style type="text/css">
+.MathJax_Display,
+DIV.MathJax_MathML,
+.MathJax_SVG_Display {
+    background-color: white;
+    font-color: red;
+    width: 850px !important;
+    padding: 10px !important;
+    display: inline-block !important;
+}
+p.equation{
+    text-align: center;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section data-background="img/Da-Vinci-Invention.jpg">
+            <h1>Estudos de Sistemas</h1>
+            <h1> Dinâmicos Não</h1>
+            <h1> Lineares:</h1>
+            <h3> Pêndulo Duplo, Batimentos Cardíacos e Coletivos de Animais</h3>
+            <br>
+            <br>
+            <p>
+            <h4>Angelo Mondaini Calvão</h4>
+            </p>
+            <p>
+            <h4>Orientador: Thadeu Josino Pereira Penna</h4>
+            </p>
+        </section>
+
+        <section data-background="img/evolucao.png">
+            <section>
+                <h2>A evolução do doutorado</h2>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </section>
+            <section>
+                <h2>Linguagens de Programação</h2>
+                <img src="img/compiler.jpg" width="629" height="459">
+            </section>
+            <section>
+                <h4>The RedMonk Programming Language Rankings: January 2014</h4>
+                <img src="img/scatterplot_languages.png" width="829" height="659">
+            </section>
+            <section>
+                <h2>Compartilhando o Código</h2>
+                <img src="img/github.png" width="750" height="459">
+            </section>
+            <section>
+                <h2>Uma tentativa experimental</h2>
+                <img src="img/Arduino.jpg" width="750" height="459">
+            </section>
+            <section>
+                <h2>A torneira que pinga</h2>
+                <img src="img/faulcet.jpg" width="750" height="459">
+            </section>
+            <section>
+                <h2>De volta a computação</h2>
+                <img src="img/ibm_supercomputer-500.jpg" width="750" height="459">
+            </section>
+        </section>
+
+        <section data-background="img/Beautiful-Night-Sky-Wallpaper.jpg">
+            <section>
+                <h2>Um Pouco de História</h2>
+                <img src="img/scientific-method-18.jpg" width="629" height="459">
+                <h4>LEINE, R. I. The historical development of classical
+                    stability concepts: Lagrange, poisson and lyapunov stability. 
+                    Nonlinear Dynamics, Springer, v. 59, n. 1-2, p. 173–182, 2010.
+                </h4>
+            </section>
+            <section>
+                <h2>O Problema de N Corpos</h2>
+                <img src="img/terra e sol.jpg" width="629" height="459">
+            </section>
+            <section>
+                <h2>O desafio do Rei</h2>
+                <img src="img/king.jpg" width="629" height="459">
+                <h4>Rei Oscar II da Suécia - 1887</h4>
+            </section>
+            <section>
+                <h2>O Demônio de Laplace</h2>
+                <img src="img/dark-demon.jpg" width="829" height="459">
+                <h4> LAPLACE, P. S. A philosophical essay on probabilities.
+                    [S.l.]: Wiley, 1902. </h4> 
+            </section>
+            <section>
+                <h2>Sensibilidade às Condições iniciais</h2>
+                <img src="img/different-roads.jpg" width="529" height="559">
+            </section>
+            <section>
+                <h2>Controle de Caos</h2>
+                <img src="img/Terra-satélite.jpg" width="829" height="459">
+                <h4> FARQUHAR, R.; MUHONEN, D.; CHURCH, L. C. (Ed.).
+                    Trajectories and orbital maneuvers for the ISEE-3/ICE comet mission. [S.l.: s.n.], 1984. 
+                </h4>
+            </section>
+        </section>
+
+        <section data-background="img/roda_dentada.png">
+            <section>
+                <h2>Modelos Simples Porém Complexos</h2>
+                <img src="img/Trinity_Gadget_001.jpg" width="829" height="559" >
+            </section>
+            <section>
+                <h3>O mapa Logístico</h3>
+                <p class="equation" style="color:#000000"> 
+                <script type="math/tex; mode=display"> X_{n+1} = R X_{n} \left[1 - \frac{X_n}{P_{max}}\right] </script>
+                <script type="math/tex; mode=display"> x_{n+1} = a x_n (1 - x_n) </script>
+                </p>
+                <img src="img/diagrama_logistico.png" width="529" height="359" >
+                <h4>
+                    MAY, R. M. Simple mathematical models with very complicated dynamics. 
+                    Nature, v. 261, p. 459–467, 1976.
+                </h4>
+            </section>
+
+            <section>
+                <h3>O Sistema de Lorenz</h3>
+                <p style="color:#000000"> 
+                <script type="math/tex; mode=display"> \left\{ 
+                    \begin{array}{rl}
+                    \mbox{$ \frac{dx}{dt}$} &= \mbox{$\sigma(y-x) $} \\
+                    \mbox{$\frac{dy}{dt}$} &= \mbox{$x(\rho-z)-y$} \\
+                    \mbox{$\frac{dz}{dt}$} &= \mbox{$xy-\beta z$} 
+                    \end{array} \right.</script>
+                </p>
+                <img src="img/atrator_lorenz.png" width="529" height="359" >
+                <h4>
+                    LORENZ, E. Deterministic Nonperiodic Flow. Journal of Atmospheric Sciences, v. 20, p.  130–148, mar. 1963. 
+                </h4>
+            </section>
+            <section>
+                <h3>O Sistema de Rössler</h3>
+                <p style="color:#000000"> 
+                <script type="math/tex; mode=display"> 
+                    \left\{ 
+                    \begin{array}{rl}
+                    \mbox{$ \frac{dx}{dt}$} &= \mbox{$-y-z$} \\
+                    \mbox{$\frac{dy}{dt}$} &= \mbox{$x+ay$} \\
+                    \mbox{$\frac{dz}{dt}$} &= \mbox{$b+z(x-c)$} 
+                    \end{array} \right.
+                </script>
+                </p>
+                <img src="img/rossler.png" width="529" height="359" >
+                <h4>
+                    RÖSSLER, O. E. An equation for continuous chaos. Physics Letters A, v. 57, n. 5, p. 397 – 398, 1976. ISSN 0375-9601. 
+                </h4>
+            </section>
+        </section>
+
+        <section data-background="img/Chaos_background.jpg">
+            <section>
+                <h2>Teoria do Caos</h2>
+                <img src="img/chaos-theory-cartoon.jpg" width="529" height="659" >
+            </section>
+            <section>
+                <h2>Diagramas de teia do mapa logístico</h2>
+                <img src="img/diagramas_de_teia.png" width="729" height="659" >
+            </section>
+            <section>
+                <h2>Diagramas de Bifurcação do mapa logístico</h2>
+                <img src="img/bifurcation_lmap.png" width="829" height="559" >
+            </section>
+            <section>
+                <h2>Plano de fase do sistema de Rössler</h2>
+                <img src="img/planos_de_fase_rossler.png" width="1000" height="559" >
+            </section>
+            <section>
+                <h2>Diagramas de Bifurcação do sistema de Rössler</h2>
+                <img src="img/bifurcation_rossler.png" width="829" height="559" >
+            </section>
+            <section>
+                <h2>O expoente de Lyapunov</h2>
+                <p class="equation" style="color:#000000"> 
+                <script type="math/tex; mode=display"> 
+\lambda _i = \lim_{t \rightarrow \infty} \lim_{\epsilon_i(t_0)
+                    \rightarrow 0} \frac{1}{t} \log_2 \frac{\epsilon_i(t)}{\epsilon_i(t_0)} 
+                </script>
+                </p>
+                <img src="img/lyapunov.png" width="829" height="259" >
+                <h4>
+                    WOLF, A. et al. Determining lyapunov exponents from a time series. Physica D Nonlinear
+                    Phenomena, v. 16, p. 285–317, jul 1985. 
+                </h4>
+            </section>
+        </section>
+
+        <section data-background="img/time_background.jpg">
+            <section>
+                <h2>Séries Temporais</h2>
+                <img src="img/exemplo_series.png" width="829" height="659" >
+            </section>
+            <section>
+                <h2>Análise de Fourier</h2>
+                <img src="img/fourier.png" width="629" height="700" >
+            </section>
+            <section>
+                <h2>Autocorrelação</h2>
+                <p class="equation" style="color:#000000"> 
+                <script type="math/tex; mode=display"> 
+COV = \frac{\frac{1}{N} \sum_{m=1}^N [s(m) - \overline{s}][\varsigma(m) -
+                    \overline{\varsigma}]}{\sigma_m\sigma_{\varsigma}}
+                </script>
+                </p>
+                <br>
+                <p class="equation" style="color:#000000"> 
+                <script type="math/tex; mode=display"> 
+C_L(\tau) = \frac{\frac{1}{N} \sum_{m=1}^N [s(m + \tau) - \overline{s}][s(m) - \overline{s}]}{\sigma_s^2}
+                    \label{eq:autocorrelacao}
+                </script>
+                </p>
+                <br>
+                <p class="equation" style="color:#000000"> 
+                <script type="math/tex; mode=display"> 
+[s(n + \tau) - \overline{s}] = C_L(\tau)[s(n)-\overline{s}].
+                </script>
+                </p>
+            </section>
+            <section>
+                <h2>Reconstrução de Atratores</h2>
+                <img src="img/rebuild.jpg" width="700" height="550" >
+                <h4>
+                    TAKENS, F. Detecting strange attractors in turbulence.  Dynamical systems and
+                    turbulence, Springer, v. 898, p. 366–381, 1981.
+                </h4>
+            </section>
+            <section>
+                <h2>Reconstrução de Atratores na prática</h2>
+                <img src="img/difficult.jpg" width="700" height="550" >
+                <h4>
+                    ABARBANEL, H. et al. The analysis of observed chaotic data in physical systems.
+                    Reviews of Modern Physics, v. 65, p. 1331–1392, out. 1993.
+                </h4>
+            </section>
+            <section>
+                <h2>Mapas de Recorrência</h2>
+                <img src="img/exp_rp.png" width="900" height="500" >
+                <h4>
+                    MARWAN, N. et al. Recurrence plots for the analysis of complex systems. Physics Reports,
+                    v. 438, n. 5–6, p. 237 – 329, 2007. ISSN 0370-1573. 
+                </h4>
+            </section>
+        </section>
+
+        <section data-background="img/pendulo_led.png">
+            <section>
+                <h2>O Pêndulo Duplo</h2>
+                <img src="img/pendulo_scheam.png" width="429" height="400" >
+            </section>
+            <section>
+                <h2>O Regime Periódico</h2>
+                <video width="600" height="600" controls="controls">
+                    <source
+                    src="movies/dp_periodic.mp4"
+                    type="video/mp4">
+                </video>
+            </section>
+            <section>
+                <h2>O Regime Caótico</h2>
+                <video width="600" height="600" controls="controls">
+                    <source
+                    src="movies/dp_chaotic.mp4"
+                    type="video/mp4">
+                </video>
+            </section>
+            <section>
+                <h2>Diagramas de bifurcação (Simétrico)</h2>
+                <img src="img/bif_symmetric_double_pendulum.png" width="700" height="500" >
+            </section>
+            <section>
+                <h2>Diagramas de bifurcação (Assimétrico)</h2>
+                <img src="img/bif_asymmetric_double_pendulum.png" width="700" height="500" >
+            </section>
+            <section>
+                <h2>Expoente de Lyapunov</h2>
+                <img src="img/dp_lyapunov.png" width="800" height="400" >
+            </section>
+            <section>
+                <h2>Análise de Fourier</h2>
+                <img src="img/dp_fourier.png" width="800" height="700" >
+            </section>
+            <section>
+                <h2>Autocorrelação</h2>
+                <img src="img/dp_autocorrelação.png" width="800" height="700" >
+            </section>
+            <section>
+                <h2>Mapas de Recorrência</h2>
+                <img src="img/dp_recorrência.png" width="800" height="350" >
+            </section>
+            <section>
+                <h2>Análise quantitativa dos Mapas de Recorrência</h2>
+                <img src="img/dp_rqa.png" width="500" height="400" >
+            </section>
+
+        </section>
+
+        <section data-background="img/coracao_background.jpg">
+            <section>
+                <h2>Variabilidade Cardíaca</h2>
+            </section>
+            <section>
+                <h2>O desafio da fisiologia</h2>
+                <img src="img/Starwars-Clones.jpg" width="829" height="559" >
+                <h3>Diferentes sistemas em diferentes condições externas</h3>
+            </section>
+            <section>
+                <h2>Análise da variabilidade da taxa cardíaca</h2>
+                <img src="img/intervalos_rr.png" width="829" height="359" >
+            </section>
+            <section>
+                <h2>O controle Neural</h2>
+                <img src="img/controle_neural.png" width="700" height="600" >
+            </section>
+            <section>
+                <h2>O experimento</h2>
+                <img src="img/posição_experimento.png" width="700" height="600" style="background-color:white;" />
+            </section>
+            <section>
+                <h2>Análise no domínio do Tempo</h2>
+                <img src="img/tabela_estatística.png" width="700" height="500" >
+            </section>
+            <section>
+                <h2>Análise no domínio das frequências</h2>
+                <img src="img/psd_coração.png" width="700" height="600" >
+            </section>
+            <section>
+                <h2>Testes Estatísticos</h2>
+                <img src="img/statistics-science-lie.gif" width="629" height="559" >
+                <h4>BERGER, J. O.; BERRY, D. A. Statistical analysis and the illusion of objectivity.
+                    American Scientist, JSTOR, v. 76, n. 2, p. 159–165, 1988. 
+                </h4>
+            </section>
+            <section>
+                <h2>Auto correlação (I)</h2>
+                <img src="img/autocorrelacao_1.png" width="729" height="659" >
+            </section>
+            <section>
+                <h2>Auto correlação (II)</h2>
+                <img src="img/autocorrelacao_2.png" width="729" height="659" >
+            </section>
+            <section>
+                <h2>Informação Mútua (Supino)</h2>
+                <img src="img/informação_mútua_supino.png" width="729" height="459" >
+            </section>
+            <section>
+                <h2>Informação Mútua (Ortostática)</h2>
+                <img src="img/informação_mútua_ortostático.png" width="729" height="459" >
+            </section>
+            <section>
+                <h2>Método do Falso vizinho mais próximo (supino)</h2>
+                <img src="img/fnn_supino.png" width="729" height="459" >
+            </section>
+            <section>
+                <h2>Método do Falso vizinho mais próximo (Ortostática)</h2>
+                <img src="img/fnn_ortostática.png" width="729" height="459" >
+            </section>
+            <section>
+                <h2>Mapas de Recorrência</h2>
+                <img src="img/rp_coração.png" width="729" height="729" >
+            </section>
+            <section>
+                <h2>Análise quantitativa dos Mapas de Recorrência</h2>
+                <img src="img/rqa_coração.png" width="900" height="400" >
+            </section>
+
+        </section>
+
+        <section data-background="img/School-of-Fish.jpg">
+            <section>
+                <h2>Coletividade de Animais</h2>
+                <img src="img/complex_parts.jpg" width="829" height="559" >
+            </section>
+            <section>
+                <h2>Motivação</h2>
+                <img src="img/fish_voronoi.png" width="829" height="559" >
+            </section>
+            <section>
+                <h2>O modelo</h2>
+                <img src="img/modelo_zebra.png" width="629" height="559" >
+            </section>
+            <section>
+                <h2>O modelo em ação</h2>
+                <video width="600" height="600" controls="controls">
+                    <source
+                    src="movies/swarm_simulation.ogg"
+                    type="video/ogg">
+                </video>
+            </section>
+            <section>
+                <h2>O desafio Computacional</h2>
+                <img src="img/tempo_convergencia.png" width="729" height="559" style="background-color:white;" >
+            </section>
+            <section>
+                <h2>Em busca de um algorítimo de busca eficiente</h2>
+                <img src="img/cgal_front_page_2013.png" width="829" height="359" style="background-color:white;" >
+            </section>
+            <section>
+                <h2>Configurações Finais (1)</h2>
+                <img src="img/swarms_configurations_1.png" width="629" height="659" style="background-color:white;" >
+            </section>
+            <section>
+                <h2>Configurações Finais (2)</h2>
+                <img src="img/swarms_configurations_2.png" width="629" height="659" style="background-color:white;" >
+            </section>
+            <section>
+                <h2>Resultados Quantitativos</h2>
+                <img src="img/parametros_de_ordem.png" width="629" height="459" style="background-color:white;" >
+            </section>
+        </section>
+
+        <section data-background="img/tunnellight.jpg">
+            <h2>Comentários Finais</h2>
+
+            <p>
+            <h4>O pêndulo duplo</h4>
+            <h4>
+            <ul>
+                <li>Pouco abordado na literatura</li>
+                <li>Variações ainda não abordadas(base oscilante)</li>
+                <li>Intuitivo</li>
+            </ul>
+            </h4>
+            </p>
+
+            <p>
+            <h4>Variabilidade Cardíaca</h4>
+            <h4>
+            <ul>
+                <li>Interesses clínicos e teóricos </li>
+                <li>Sistema desafiador</li>
+                <li>Ausência de modelos</li>
+            </ul>
+            </h4>
+            </p>
+
+            <p>
+            <h4>Coletividade de animais</h4>
+            <h4>
+            <ul>
+                <li>Modelo Realista</li>
+                <li>Aplicações com robôs</li>
+            </ul>
+            </h4>
+            </p>
+        </section>
+
+        <section data-background="img/light-at-end.jpg">
+            <h1>Obrigado pela sua  Atenção!</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+controls: true,
+progress: true,
+history: true,
+center: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+// Parallax scrolling
+// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+// parallaxBackgroundSize: '2100px 900px',
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+
+</script>
+
+</body>
+</html>
